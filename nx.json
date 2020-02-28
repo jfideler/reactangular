@@ -18,12 +18,12 @@
       "tags": [],
       "implicitDependencies": ["buyer"]
     },
-    "admin": {
+    "viewer": {
       "tags": []
     },
-    "admin-e2e": {
+    "viewer-e2e": {
       "tags": [],
-      "implicitDependencies": ["admin"]
+      "implicitDependencies": ["viewer"]
     },
     "utilities": {
       "tags": []

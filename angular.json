@@ -124,22 +124,22 @@
         }
       }
     },
-    "admin": {
-      "root": "apps/admin",
-      "sourceRoot": "apps/admin/src",
+    "viewer": {
+      "root": "apps/viewer",
+      "sourceRoot": "apps/viewer/src",
       "projectType": "application",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/web:build",
           "options": {
-            "outputPath": "dist/apps/admin",
-            "index": "apps/admin/src/index.html",
-            "main": "apps/admin/src/main.tsx",
-            "polyfills": "apps/admin/src/polyfills.ts",
-            "tsConfig": "apps/admin/tsconfig.app.json",
-            "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
-            "styles": ["apps/admin/src/styles.css"],
+            "outputPath": "dist/apps/viewer",
+            "index": "apps/viewer/src/index.html",
+            "main": "apps/viewer/src/main.tsx",
+            "polyfills": "apps/viewer/src/polyfills.ts",
+            "tsConfig": "apps/viewer/tsconfig.app.json",
+            "assets": ["apps/viewer/src/favicon.ico", "apps/viewer/src/assets"],
+            "styles": ["apps/viewer/src/styles.css"],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -147,8 +147,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.prod.ts"
+                  "replace": "apps/viewer/src/environments/environment.ts",
+                  "with": "apps/viewer/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -171,11 +171,11 @@
         "serve": {
           "builder": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "admin:build"
+            "buildTarget": "viewer:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "admin:build:production"
+              "buildTarget": "viewer:build:production"
             }
           }
         },
@@ -183,45 +183,45 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/admin/tsconfig.app.json",
-              "apps/admin/tsconfig.spec.json"
+              "apps/viewer/tsconfig.app.json",
+              "apps/viewer/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/admin/**"]
+            "exclude": ["**/node_modules/**", "!apps/viewer/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/admin/jest.config.js",
-            "tsConfig": "apps/admin/tsconfig.spec.json",
+            "jestConfig": "apps/viewer/jest.config.js",
+            "tsConfig": "apps/viewer/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
       }
     },
-    "admin-e2e": {
-      "root": "apps/admin-e2e",
-      "sourceRoot": "apps/admin-e2e/src",
+    "viewer-e2e": {
+      "root": "apps/viewer-e2e",
+      "sourceRoot": "apps/viewer-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/admin-e2e/cypress.json",
-            "tsConfig": "apps/admin-e2e/tsconfig.e2e.json",
-            "devServerTarget": "admin:serve"
+            "cypressConfig": "apps/viewer-e2e/cypress.json",
+            "tsConfig": "apps/viewer-e2e/tsconfig.e2e.json",
+            "devServerTarget": "viewer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "admin:serve:production"
+              "devServerTarget": "viewer:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/admin-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/admin-e2e/**"]
+            "tsConfig": ["apps/viewer-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/viewer-e2e/**"]
           }
         }
       }

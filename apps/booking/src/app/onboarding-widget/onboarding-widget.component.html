@@ -1,0 +1,16 @@
+<div class = 'main'>
+
+  <h2>Welcome to your new project!</h2>
+
+  Follow these steps to get you up and running...
+  <ul>
+    <li><input type="checkbox" (change)="helpWith($event,'this')">Use the dashboard</li>
+    <li><input type="checkbox" (change)="helpWith($event,'that')">Use findings</li>
+    <li><input type="checkbox" (change)="helpWith($event, 'the other')">Do something to a document</li>
+  </ul>
+  <a (click) = "toggleMe()" role="link">[Got it...]</a>
+</div>
+<span hidden id="#helpForOne">Shazam! This help message is here to help with Viewer</span>
+<span hidden id="#helpForThat">Shazam! This help message is here to help with Findings</span>
+<span hidden id="#helpForTheOther">Shazam! This help message is here to help with Dashboard</span>
+

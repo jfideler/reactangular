@@ -1,105 +1,55 @@
-import React from 'react';
-
+import React, { Component } from 'react';
+import { unicornRocket } from '@ra-app/utilities';
 import './app.css';
 
-import { ReactComponent as Logo } from './logo.svg';
-import star from './star.svg';
 
-export const App = () => {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./app.css file.
-   */
-  return (
-    <div className="app">
-      <header className="flex">
-        <Logo width="75" height="75" />
-        <h1>Welcome to admin!</h1>
-      </header>
-      <main>
-        <h2>Resources &amp; Tools</h2>
-        <p>Thank you for using and showing some ♥ for Nx.</p>
-        <div className="flex github-star-container">
-          <a
-            href="https://github.com/nrwl/nx"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {' '}
-            If you like Nx, please give it a star:
-            <div className="github-star-badge">
-              <img src={star} className="material-icons" alt="" />
-              Star
-            </div>
-          </a>
+class App extends Component {
+
+  constructor(props: any) {
+    super(props);
+
+    // Setup to listen for help helper(s)...
+    const src = "http://localhost:4200";
+
+    const msgHandler = function (e) {
+      if (e.data && !e.data.action && !e.data.type) {
+        console.log("handling specific", e.data);
+        const div = document.querySelector(".seekHelp");
+        div.innerHTML += e.data;
+      }
+    };
+    window.addEventListener("message", msgHandler, false);
+
+    const postMsgUnload = function (e) {
+      console.log("closed-posting?", e);
+      e.currentTarget.opener.postMessage("closed", src);
+    };
+    // when we have closed the window, tell the parent that it is closed.
+    window.addEventListener("unload", postMsgUnload, false);
+
+    const postMsgLoad = function (e) {
+      console.log("ready-posting?", e);
+      const tg = src + "/viewer-app";
+      e.currentTarget.opener.postMessage("ready", tg);
+    };
+    // when we have loaded the window, tell the parent that it is loaded.
+    window.addEventListener("load", postMsgLoad, false);
+  }
+
+
+  render() {
+    return (
+      <div className="app">
+        <header className="flex">
+          <h1>webViewer-ui simulation {unicornRocket} !</h1>
+        </header>
+        <div>
+          Imagine that this is the webViewer-ui and you wanted help with...
         </div>
-        <p>Here are some links to help you get started.</p>
-        <ul className="resources">
-          <li className="col-span-2">
-            <a
-              className="resource flex"
-              href="https://connect.nrwl.io/app/courses/nx-workspaces/intro"
-            >
-              Nx video course
-            </a>
-          </li>
-          <li className="col-span-2">
-            <a
-              className="resource flex"
-              href="https://nx.dev/react/getting-started/what-is-nx"
-            >
-              Nx video tutorial
-            </a>
-          </li>
-          <li className="col-span-2">
-            <a
-              className="resource flex"
-              href="https://nx.dev/react/tutorial/01-create-application"
-            >
-              Interactive tutorial
-            </a>
-          </li>
-          <li className="col-span-2">
-            <a className="resource flex" href="https://connect.nrwl.io/">
-              <img
-                height="36"
-                alt="Nrwl Connect"
-                src="https://connect.nrwl.io/assets/img/CONNECT_ColorIcon.png"
-              />
-              <span className="gutter-left">Nrwl Connect</span>
-            </a>
-          </li>
-        </ul>
-        <h2>Next Steps</h2>
-        <p>Here are some things you can do with Nx.</p>
-        <details open>
-          <summary>Add UI library</summary>
-          <pre>{`# Generate UI lib
-nx g @nrwl/react:lib ui
-
-# Add a component
-nx g @nrwl/react:component xyz --project ui`}</pre>
-        </details>
-        <details>
-          <summary>View dependency graph</summary>
-          <pre>{`nx dep-graph`}</pre>
-        </details>
-        <details>
-          <summary>Run affected commands</summary>
-          <pre>{`# see what's been affected by changes
-nx affected:dep-graph
-
-# run tests for current changes
-nx affected:test
-
-# run e2e tests for current changes
-nx affected:e2e
-`}</pre>
-        </details>
-      </main>
-    </div>
-  );
-};
+          <div className="seekHelp"></div>
+      </div>
+    );
+  }
+}
 
 export default App;

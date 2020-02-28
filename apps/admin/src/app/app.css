@@ -24,14 +24,13 @@
 }
 
 .app header {
-  background-color: #143055;
-  color: white;
+  background-color: #BED4E7;
   padding: 5px;
   border-radius: 3px;
 }
 
 .app main {
-  padding: 0 36px;
+  padding: 0 26px;
 }
 
 .app p {
@@ -125,8 +124,15 @@
   border-color: rgba(27, 31, 35, 0.35);
   background-position: -0.5em;
 }
+
 .app .github-star-badge .material-icons {
   height: 16px;
   width: 16px;
   margin-right: 4px;
+}
+
+.seekHelp {
+  margin-top:25px;
+  border: 2px red solid;
+  max-width: 200px;
 }

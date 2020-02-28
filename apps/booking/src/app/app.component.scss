@@ -5,8 +5,22 @@
   display: block;
   font-family: sans-serif;
   min-width: 300px;
-  max-width: 600px;
   margin: 50px auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  font-size: smaller;
+}
+
+.tour {
+  max-width: 300px;
+}
+.top-menu {
+  display: inline-block;
 }
 
 .gutter-left {
@@ -19,13 +33,12 @@
 
 .flex {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
 }
 
 header {
-  background-color: #143055;
-  color: white;
+  background-color: #bed4e7;
   padding: 5px;
   border-radius: 3px;
 }

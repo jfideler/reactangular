@@ -1,39 +1,39 @@
 {
   "version": 1,
   "projects": {
-    "booking": {
+    "buyer": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/booking",
-      "sourceRoot": "apps/booking/src",
+      "root": "apps/buyer",
+      "sourceRoot": "apps/buyer/src",
       "prefix": "ra-app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/booking",
-            "index": "apps/booking/src/index.html",
-            "main": "apps/booking/src/main.ts",
-            "polyfills": "apps/booking/src/polyfills.ts",
-            "tsConfig": "apps/booking/tsconfig.app.json",
+            "outputPath": "dist/apps/buyer",
+            "index": "apps/buyer/src/index.html",
+            "main": "apps/buyer/src/main.ts",
+            "polyfills": "apps/buyer/src/polyfills.ts",
+            "tsConfig": "apps/buyer/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/booking/src/favicon.ico",
-              "apps/booking/src/assets"
+              "apps/buyer/src/favicon.ico",
+              "apps/buyer/src/assets"
             ],
-            "styles": ["apps/booking/src/styles.scss"],
+            "styles": ["apps/buyer/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/booking/src/environments/environment.ts",
-                  "with": "apps/booking/src/environments/environment.prod.ts"
+                  "replace": "apps/buyer/src/environments/environment.ts",
+                  "with": "apps/buyer/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -62,64 +62,64 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "booking:build"
+            "browserTarget": "buyer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "booking:build:production"
+              "browserTarget": "buyer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "booking:build"
+            "browserTarget": "buyer:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/booking/tsconfig.app.json",
-              "apps/booking/tsconfig.spec.json"
+              "apps/buyer/tsconfig.app.json",
+              "apps/buyer/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/booking/**"]
+            "exclude": ["**/node_modules/**", "!apps/buyer/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/booking/jest.config.js",
-            "tsConfig": "apps/booking/tsconfig.spec.json",
+            "jestConfig": "apps/buyer/jest.config.js",
+            "tsConfig": "apps/buyer/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "apps/booking/src/test-setup.ts"
+            "setupFile": "apps/buyer/src/test-setup.ts"
           }
         }
       }
     },
-    "booking-e2e": {
-      "root": "apps/booking-e2e",
-      "sourceRoot": "apps/booking-e2e/src",
+    "buyer-e2e": {
+      "root": "apps/buyer-e2e",
+      "sourceRoot": "apps/buyer-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/booking-e2e/cypress.json",
-            "tsConfig": "apps/booking-e2e/tsconfig.e2e.json",
-            "devServerTarget": "booking:serve"
+            "cypressConfig": "apps/buyer-e2e/cypress.json",
+            "tsConfig": "apps/buyer-e2e/tsconfig.e2e.json",
+            "devServerTarget": "buyer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "booking:serve:production"
+              "devServerTarget": "buyer:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/booking-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/booking-e2e/**"]
+            "tsConfig": ["apps/buyer-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/buyer-e2e/**"]
           }
         }
       }
@@ -279,5 +279,5 @@
       }
     }
   },
-  "defaultProject": "booking"
+  "defaultProject": "buyer"
 }

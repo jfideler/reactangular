@@ -11,12 +11,12 @@
     "nx.json": "*"
   },
   "projects": {
-    "booking": {
+    "buyer": {
       "tags": []
     },
-    "booking-e2e": {
+    "buyer-e2e": {
       "tags": [],
-      "implicitDependencies": ["booking"]
+      "implicitDependencies": ["buyer"]
     },
     "admin": {
       "tags": []

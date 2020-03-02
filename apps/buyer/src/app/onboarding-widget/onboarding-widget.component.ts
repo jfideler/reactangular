@@ -31,7 +31,8 @@ export class OnboardingWidgetComponent implements OnInit {
     }
 
     window.removeEventListener('message', this.handleMessage);
-    const url = 'http://localhost:4201';
+    let url = 'http://localhost:4201';
+    let feat = 'width=500,height=500';
 
     switch (item) {
       case 'this':
@@ -51,9 +52,17 @@ export class OnboardingWidgetComponent implements OnInit {
         window.localStorage.setItem('helpWith', 'Shazam! The other help message is here to help with Viewer');
         window.addEventListener('message', this.handleMessage, false);
         break;
+
+      default:
+        feat = null;
+        url = 'https://local-web.core.merrillcorp.com/viewer?projectId=5d2e2a858b09470011d8d269&documentId=5e4c2e60463a860f435a946e';
+        window.localStorage.setItem('helpWith', 'Hey! it looks like you need some help in the DS1 Viewer!');
+        window.addEventListener('message', this.handleMessage, false);
+        break;
+
     }
 
-    window.open(url, 'newwin', 'width=500,height=500');
+    window.open(url, 'newwin', feat ? feat : null);
   }
 
   setStorage(key: string, val: string) {
@@ -61,7 +70,7 @@ export class OnboardingWidgetComponent implements OnInit {
   }
 
   handleMessage(e: any) {
-    console.log('tour is handling message', e.origin, e, 'help:', this.helpId);
+    console.log('tour is handling message from', e.origin, e, 'help:', this.helpId);
     let interval;
     const msg=window.localStorage.helpWith;
 

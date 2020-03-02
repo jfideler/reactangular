@@ -4,9 +4,10 @@
 
   Follow these steps to get you up and running...
   <ul>
-    <li><input type="checkbox" (change)="helpWith($event,'this')">Use the dashboard</li>
-    <li><input type="checkbox" (change)="helpWith($event,'that')">Use findings</li>
-    <li><input type="checkbox" (change)="helpWith($event, 'the other')">Do something to a document</li>
+    <li><input type="checkbox" (change)="helpWith($event,'this')">Help w/ the dashboard</li>
+    <li><input type="checkbox" (change)="helpWith($event,'that')">Help w/ findings</li>
+    <li><input type="checkbox" (change)="helpWith($event, 'the other')">Help outside this app</li>
+    <li><input type="checkbox" (change)="helpWith($event, 'this other')">Help with a document</li>
   </ul>
   <a (click) = "toggleMe()" role="link">[Got it...]</a>
 </div>

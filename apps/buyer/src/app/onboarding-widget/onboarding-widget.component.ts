@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ViewChild,
   ElementRef
 } from '@angular/core';
@@ -11,28 +10,30 @@ import { Router } from '@angular/router';
   templateUrl: './onboarding-widget.component.html',
   styleUrls: ['./onboarding-widget.component.scss']
 })
-export class OnboardingWidgetComponent implements OnInit {
+export class OnboardingWidgetComponent {
   helpId = '#helpForTheOther';
   @ViewChild('helpForOne', { static: false }) _helpForOne: ElementRef;
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
-
-  toggleMe() {
-    console.log('toggling');
+  toggleTour() {
     this.router.navigate([{ outlets: { tour: null } }]);
   }
+
+  // write help message to local storage
+  setStorage(key: string, val: string) {
+    localStorage.setItem(key, val);
+  }
+
 
   helpWith(e: any, item: string) {
     if (!e.srcElement.checked) {
       return;
     }
 
-    window.removeEventListener('message', this.handleMessage);
     let url = 'http://localhost:4201';
     let feat = 'width=500,height=500';
+    window.removeEventListener('message', this.handleMessage);
 
     switch (item) {
       case 'this':
@@ -65,10 +66,6 @@ export class OnboardingWidgetComponent implements OnInit {
     window.open(url, 'newwin', feat ? feat : null);
   }
 
-  setStorage(key: string, val: string) {
-    localStorage.setItem(key, val);
-  }
-
   handleMessage(e: any) {
     console.log('tour is handling message from', e.origin, e, 'help:', this.helpId);
     let interval;
@@ -78,17 +75,16 @@ export class OnboardingWidgetComponent implements OnInit {
       win.postMessage(msg + '<br>', '*');
     };
 
-    // check the origin
+    // check the data from the receiving site...
     if (e.origin)
       switch (e.data) {
+        // if sure it's ready, post the help message
         case 'ready':
-          // e.source = the sending window object
           console.log('case ready', e);
-          interval = setTimeout(
-            postmsg
-            , 1000, e.source);
+          interval = setTimeout( postmsg, 1000, e.source);
           break;
 
+        // if closed, clear the timer
         case 'closed':
           console.log('case closed', e);
           clearInterval(interval);

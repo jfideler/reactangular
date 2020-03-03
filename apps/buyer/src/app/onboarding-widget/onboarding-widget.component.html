@@ -1,17 +1,35 @@
-<div class = 'main'>
+<div class="drag-box main" cdkDrag>
 
-  <h2>Welcome to your new project!</h2>
+    <h2>Welcome to your new project!</h2>
 
-  Follow these steps to get you up and running...
-  <ul>
-    <li><input type="checkbox" (change)="helpWith($event,'this')">Help w/ the dashboard</li>
-    <li><input type="checkbox" (change)="helpWith($event,'that')">Help w/ findings</li>
-    <li><input type="checkbox" (change)="helpWith($event, 'the other')">Help outside this app</li>
-    <li><input type="checkbox" (change)="helpWith($event, 'this other')">Help with a document</li>
-  </ul>
-  <a (click) = "toggleTour()" role="link">[Got it...]</a>
-</div>
-<span hidden id="#helpForOne">Shazam! This help message is here to help with Viewer</span>
-<span hidden id="#helpForThat">Shazam! This help message is here to help with Findings</span>
-<span hidden id="#helpForTheOther">Shazam! This help message is here to help with Dashboard</span>
+    Follow these steps to get you up and running...
+    <ul>
+      <li>
+        <input type="checkbox" (change)="helpWith($event, 'this')" />Help w/ the
+        dashboard
+      </li>
+      <li>
+        <input type="checkbox" (change)="helpWith($event, 'that')" />Help w/
+        findings
+      </li>
+      <li>
+        <input type="checkbox" (change)="helpWith($event, 'the other')" />Help
+        outside this app
+      </li>
+      <li>
+        <input type="checkbox" (change)="helpWith($event, 'this other')" />Help
+        with a document
+      </li>
+    </ul>
+    <a (click)="toggleTour()" role="link">[Got it...]</a>
+  </div>
 
+<span hidden id="#helpForOne"
+  >Shazam! This help message is here to help with Viewer</span
+>
+<span hidden id="#helpForThat"
+  >Shazam! This help message is here to help with Findings</span
+>
+<span hidden id="#helpForTheOther"
+  >Shazam! This help message is here to help with Dashboard</span
+>

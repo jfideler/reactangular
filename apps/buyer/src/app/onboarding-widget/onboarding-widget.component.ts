@@ -4,6 +4,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'ra-app-onboarding-widget',

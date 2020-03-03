@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app.routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppDashboardComponent } from './app-dashboard/app-dashboard.component';
 import { FindingsComponent } from './findings/findings.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { FindingsComponent } from './findings/findings.component';
     AppDashboardComponent,
     FindingsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule, DragDropModule],
   providers: [],
   bootstrap: [AppComponent]
 })

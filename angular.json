@@ -25,7 +25,10 @@
               "apps/buyer/src/favicon.ico",
               "apps/buyer/src/assets"
             ],
-            "styles": ["apps/buyer/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/buyer/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +86,10 @@
               "apps/buyer/tsconfig.app.json",
               "apps/buyer/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/buyer/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/buyer/**"
+            ]
           }
         },
         "test": {
@@ -118,8 +124,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/buyer-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/buyer-e2e/**"]
+            "tsConfig": [
+              "apps/buyer-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/buyer-e2e/**"
+            ]
           }
         }
       }
@@ -138,8 +149,13 @@
             "main": "apps/viewer/src/main.tsx",
             "polyfills": "apps/viewer/src/polyfills.ts",
             "tsConfig": "apps/viewer/tsconfig.app.json",
-            "assets": ["apps/viewer/src/favicon.ico", "apps/viewer/src/assets"],
-            "styles": ["apps/viewer/src/styles.css"],
+            "assets": [
+              "apps/viewer/src/favicon.ico",
+              "apps/viewer/src/assets"
+            ],
+            "styles": [
+              "apps/viewer/src/styles.css"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -186,7 +202,10 @@
               "apps/viewer/tsconfig.app.json",
               "apps/viewer/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/viewer/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/viewer/**"
+            ]
           }
         },
         "test": {
@@ -220,8 +239,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/viewer-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/viewer-e2e/**"]
+            "tsConfig": [
+              "apps/viewer-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/viewer-e2e/**"
+            ]
           }
         }
       }
@@ -239,7 +263,10 @@
               "libs/utilities/tsconfig.lib.json",
               "libs/utilities/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/utilities/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/utilities/**"
+            ]
           }
         },
         "test": {

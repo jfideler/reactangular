@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy,
-  ChangeDetectorRef,
+import {
   Component,
   ElementRef,
   EventEmitter,
@@ -16,7 +15,6 @@ import { WindowSize, windowSizes, WindowSizeService } from './window-size.servic
   selector: 'ds1-tooltip-content',
   templateUrl: './tooltip-content.component.html',
   styleUrls: ['./tooltip-content.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipContentComponent implements OnDestroy, OnInit {
   @Output() closed = new EventEmitter();
@@ -30,16 +28,21 @@ export class TooltipContentComponent implements OnDestroy, OnInit {
   isTooltipWide = false;
   size: string | undefined;
 
-  private _isShown = false;
-  private _isShowing = false; // The animation state of fading out of the tooltip
-  private windowSizeChangeSubscription: Subscription;
+  // private _isShown = false;
+  isShown = false;
+  // private _isShowing = false; // The animation state of fading out of the tooltip
+  isShowing = false;
 
-  private left?: number; private right?: number; private top?: number; private bottom?: number; private arrowLeft?: number; private arrowRight?: number;
+  private windowSizeChangeSubscription: Subscription;
+  private left?: number;
+  private right?: number;
+  private top?: number;
+  private bottom?: number;
+  private arrowLeft?: number;
+  private arrowRight?: number;
 
   constructor(
-    private windowSizeService: WindowSizeService,
-    private elementRef: ElementRef,
-    private changeDetector: ChangeDetectorRef
+    private windowSizeService: WindowSizeService
   ) { }
 
   get leftPosition() { return this.left ? `${this.left}px` : 'auto'; }
@@ -48,18 +51,6 @@ export class TooltipContentComponent implements OnDestroy, OnInit {
   get bottomPosition() { return this.bottom ? `${this.bottom}px` : 'auto'; }
   get arrowLeftPosition() { return this.arrowLeft ? `${this.arrowLeft}px` : 'auto'; }
   get arrowRightPosition() { return this.arrowRight ? `${this.arrowRight}px` : 'auto'; }
-
-  get isShown() { return this._isShown; }
-  set isShown(value) {
-    this._isShown = value;
-    this.changeDetector.markForCheck();
-  }
-
-  get isShowing() { return this._isShowing; }
-  set isShowing(value) {
-    this._isShowing = value;
-    this.changeDetector.markForCheck();
-  }
 
   ngOnDestroy() {
     this.unsubscribeFromWindowSizeChange();
@@ -70,7 +61,52 @@ export class TooltipContentComponent implements OnDestroy, OnInit {
   }
 
   // Methods
-  // -------
+  private setTooltipPosition(windowSize: WindowSize) {
+    if ((!this.isShowing && !this.isShown) || !window) {
+      // No tooltip is shown OR run in SSR, thus positioning is not needed.
+      return;
+    }
+
+
+    const offsetTooltipEl = offset(this.tooltipRef.nativeElement);
+    const offsetParentEl = offset(window.document.documentElement);
+
+    // Tooltip horizontal position
+    // ---------------------------
+    const tooltipArrowWidth = 26;
+    if (windowSize === windowSizes.xs) {
+      // MOBILE
+      this.left = 15;
+      this.tooltipRef.nativeElement.width = offsetParentEl.width - 30;
+
+      const arrowOffsetHorizontalFromSize = () => { if (this.size === 'lg') { return 10; } else if (this.size === 'md') { return 5; } else { return 0; } };
+      this.arrowLeft = offsetTooltipEl.left - this.left + arrowOffsetHorizontalFromSize() + (this.hasCustomTrigger ? ((offsetTooltipEl.width / 2) - (tooltipArrowWidth / 2)) : -(offsetTooltipEl.width / 2));
+    }
+    else {
+      // TABLET AND UP
+      const tooltipWidth = 320; // have to match with scss
+
+      const arrowOffsetHorizontalFromSize = () => { if (this.size === 'lg') { return 4; } else if (this.size === 'md') { return 2; } else { return 0; } };
+      if (offsetTooltipEl.left + offsetParentEl.left < offsetParentEl.width / 2) {
+        //  tooltip from left
+        this.left = offsetTooltipEl.left - 20;
+        this.arrowLeft = (tooltipArrowWidth / 2) + arrowOffsetHorizontalFromSize();
+        this.arrowRight = undefined;
+      }
+      else {
+        //  tooltip from right
+        this.left = offsetTooltipEl.left - tooltipWidth + offsetTooltipEl.width - 40;
+        this.arrowRight = (tooltipArrowWidth / 2) + (arrowOffsetHorizontalFromSize() * 2);
+        this.arrowLeft = undefined;
+      }
+    }
+
+    // Tooltip vertical position
+    // -------------------------
+    const tooltipArrowHeight = 14;
+    this.top = offsetTooltipEl.top + offsetTooltipEl.height + tooltipArrowHeight;
+  }
+
   toggle(event: Event): void {
     !this.isShown ? this.show() : this.hide();
   }
@@ -94,63 +130,13 @@ export class TooltipContentComponent implements OnDestroy, OnInit {
   }
 
   private subscribeToWindowSizeChange() {
-    this.windowSizeChangeSubscription = this.windowSizeService.subscribeAndExecute((windowSize: WindowSize) => this.setTooltipPosition(windowSize));
+    this.windowSizeChangeSubscription = this.windowSizeService
+      .subscribeAndExecute((windowSize: WindowSize) => this.setTooltipPosition(windowSize));
   }
 
   private unsubscribeFromWindowSizeChange() {
     if (this.windowSizeChangeSubscription) {
       this.windowSizeChangeSubscription.unsubscribe();
     }
-  }
-
-  private setTooltipPosition(windowSize: WindowSize) {
-    if ((!this.isShowing && !this.isShown) || !window) {
-      // No tooltip is shown OR run in SSR, thus positioning is not needed.
-      return;
-    }
-
-    // tslint:disable-next-line: prefer-const
-    let offsetTooltipEl = offset(this.tooltipRef.nativeElement);
-    // tslint:disable-next-line: prefer-const
-    let offsetParentEl = offset(window.document.documentElement);
-
-    // Tooltip horizontal position
-    // ---------------------------
-    const tooltipArrowWidth = 26;
-    if (windowSize === windowSizes.xs) {
-      // MOBILE
-      this.left = 15;
-      this.tooltipRef.nativeElement.width = offsetParentEl.width - 30;
-
-      // tslint:disable-next-line: prefer-const
-      let arrowOffsetHorizontalFromSize = () => { if (this.size === 'lg') { return 10; } else if (this.size === 'md') { return 5; } else { return 0; } };
-      this.arrowLeft = offsetTooltipEl.left - this.left + arrowOffsetHorizontalFromSize() + (this.hasCustomTrigger ? ((offsetTooltipEl.width / 2) - (tooltipArrowWidth / 2)) : -(offsetTooltipEl.width / 2));
-    }
-    else {
-      // TABLET AND UP
-      const tooltipWidth = 320; // have to match with scss
-
-      // tslint:disable-next-line: prefer-const
-      let arrowOffsetHorizontalFromSize = () => { if (this.size === 'lg') { return 4; } else if (this.size === 'md') { return 2; } else { return 0; } };
-      if (offsetTooltipEl.left + offsetParentEl.left < offsetParentEl.width / 2) {
-        //  tooltip from left
-        this.left = offsetTooltipEl.left - 20;
-        this.arrowLeft = (tooltipArrowWidth / 2) + arrowOffsetHorizontalFromSize();
-        this.arrowRight = undefined;
-      }
-      else {
-        //  tooltip from right
-        this.left = offsetTooltipEl.left - tooltipWidth + offsetTooltipEl.width - 40;
-        this.arrowRight = (tooltipArrowWidth / 2) + (arrowOffsetHorizontalFromSize() * 2);
-        this.arrowLeft = undefined;
-      }
-    }
-
-    // Tooltip vertical position
-    // -------------------------
-    const tooltipArrowHeight = 14;
-    this.top = offsetTooltipEl.top + offsetTooltipEl.height + tooltipArrowHeight;
-
-    this.changeDetector.markForCheck();
   }
 }

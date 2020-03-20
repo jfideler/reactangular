@@ -19,15 +19,13 @@ export class TooltipContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.tooltipService.deregisterTooltipContainer();
+   this.tooltipService.deregisterTooltipContainer();
   }
 
   open<T extends TooltipContentComponent>(tooltipComponent: TooltipComponent): TooltipContentComponent {
-    // tslint:disable-next-line: prefer-const
-    let componentFactory = (<ComponentFactoryResolver>tooltipComponent.cfr).resolveComponentFactory(TooltipContentComponent);
 
-    // tslint:disable-next-line: prefer-const
-    let componentRef = this.tooltipContainerEl.createComponent(componentFactory);
+    const componentFactory = (<ComponentFactoryResolver>tooltipComponent.cfr).resolveComponentFactory(TooltipContentComponent);
+    const componentRef = this.tooltipContainerEl.createComponent(componentFactory);
 
     componentRef.instance.header = tooltipComponent.header;
     componentRef.instance.content = tooltipComponent.content;
@@ -36,6 +34,7 @@ export class TooltipContainerComponent implements OnInit, OnDestroy {
     componentRef.instance.hasCustomTrigger = tooltipComponent.hasCustomTrigger;
     componentRef.instance.isTooltipWide = tooltipComponent.isTooltipWide;
     componentRef.instance.size = tooltipComponent.size;
+
     componentRef.instance.closed.subscribe(() => {
       componentRef.destroy();
     });

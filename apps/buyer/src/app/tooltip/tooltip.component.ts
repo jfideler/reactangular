@@ -1,18 +1,13 @@
-import { Component, ViewChild, ElementRef, Input,
-  HostListener, HostBinding,
-  Directive, ChangeDetectionStrategy,
-  ComponentFactoryResolver, TemplateRef, ContentChild } from '@angular/core';
-import { Subscription } from 'rxjs';
-
-import { TooltipService } from './tooltip.service';
+import { Component, ComponentFactoryResolver, ContentChild, ElementRef, HostBinding, Input, TemplateRef, ViewChild } from '@angular/core';
 import { TooltipContentComponent } from './tooltip-content.component';
+import { TooltipService } from './tooltip.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'ds1-tooltip',
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
-  // tslint:disable-next-line:use-host-property-decorator // @HostListener doesn't work with server-side rendering (creates a reference to a browser-only event type)
+  // @HostListener doesn't work with server-side rendering (creates a reference to a browser-only event type)
   // tslint:disable-next-line: no-host-metadata-property
   host: {
     '(focusout)': 'onFocusout($event)',

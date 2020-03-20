@@ -1,7 +1,7 @@
 :host {
   display: block;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   min-width: 300px;
   max-width: 800px;
   margin: 20px auto;
@@ -10,8 +10,11 @@
 .main {
   margin: 15px;
   padding: 5px;
-  border: 2px #000 solid;
-  background-color: #fffafa;
+  border-top: 1px #F59B59 solid;
+  background-color: #fff;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .main:active {
@@ -25,11 +28,25 @@ ul {
   list-style: none;
 }
 
+li {
+  margin: 4px;
+  // display: inline;
+  padding: 4px;
+  // background-color: #fff;
+  // color: #E0E0E0;
+}
+
 a {
   margin-left: 165px;
+
 }
 
 h2 {
   font-size: 18px;
+}
+
+button {
+  background-color: blue;
+  color: #fff;
 }
 

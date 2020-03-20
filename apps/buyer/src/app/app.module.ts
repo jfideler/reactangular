@@ -9,6 +9,7 @@ import { AppDashboardComponent } from './app-dashboard/app-dashboard.component';
 import { FindingsComponent } from './findings/findings.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TooltipModule } from './tooltip/index';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppDashboardComponent,
     FindingsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule, DragDropModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    DragDropModule,
+    TooltipModule.forRoot() // This .forRoot() is necessary
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

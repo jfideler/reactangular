@@ -1,14 +1,22 @@
 <header class="flex">
   <h1>{{ title }}!</h1>
+
+  <!-- test code -->
+
+  <!-- resume -->
   <ul class="top-menu">
     <li>
       <a routerLink="">Home</a>
     </li>
     <li>
-      <a routerLink="dashboard">Dashboard</a>
+      <a routerLink="dashboard"> <span class="ui-menuitem-icon fa fa-pie-chart ng-star-inserted"></span>
+        <span class="ui-menuitem-text">Dashboard</span></a>
     </li>
     <li>
-      <a routerLink="findings">Findings</a>
+      <a routerLink="findings">
+        <span class="ui-menuitem-icon fa fa-flag ng-star-inserted"></span>
+        <span class="ui-menuitem-text">Findings</span>
+      </a>
     </li>
     <li>
       <a routerLink="not">Not Found</a>
@@ -19,6 +27,10 @@
 
 </main>
 <router-outlet></router-outlet>
+
+<!--container for ds1 tooltips-->
+<ds1-tooltip-container></ds1-tooltip-container>
+
 <div class="tour">
   <a [routerLink]="[{ outlets: { 'tour': ['component-aux'] } }]">Tour</a>
   <router-outlet name="tour"></router-outlet>

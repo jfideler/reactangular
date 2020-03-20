@@ -16,11 +16,4 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {
 
   }
-
-  navigate(path) {
-    this.router.navigate([{ outlets: { primary: path, stepper: path } }], {
-      relativeTo: this.route
-    });
-  }
-
 }

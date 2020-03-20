@@ -1,16 +1,28 @@
 <div class="drag-box main" cdkDrag>
+  <h2>Welcome to your new project!</h2>
 
-    <h2>Welcome to your new project!</h2>
-
-    Follow these steps to get you up and running...
+  Follow these steps to get you up and running...
+  <div>
     <ul>
       <li>
-        <input type="checkbox" (change)="helpWith($event, 'this')" />Help w/ the
-        dashboard
+        <ds1-tooltip header="dashboard">
+          <input type="checkbox" />Your dashboard
+          <ng-template #tooltipContentTemplate>
+            Help for your dashboard.  Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+            ipsum.
+            <button (click) = "navigate(['/dashboard'])">OK</button>
+          </ng-template>
+        </ds1-tooltip>
       </li>
       <li>
-        <input type="checkbox" (change)="helpWith($event, 'that')" />Help w/
-        findings
+        <ds1-tooltip header="findings">
+          <input type="checkbox" (change)="helpWith($event, 'that')" />Help with Findings
+          <ng-template #tooltipContentTemplate>
+            Help for Findings
+            Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.
+            <button (click) = "navigate(['/findings'])">OK</button>
+          </ng-template>
+        </ds1-tooltip>
       </li>
       <li>
         <input type="checkbox" (change)="helpWith($event, 'the other')" />Help
@@ -21,8 +33,10 @@
         with a document
       </li>
     </ul>
-    <a (click)="toggleTour()" role="link">[Got it...]</a>
   </div>
+
+  <a (click)="toggleTour()" role="link">Got it! [X]</a>
+</div>
 
 <span hidden id="#helpForOne"
   >Shazam! This help message is here to help with Viewer</span

@@ -6,14 +6,27 @@
   font-family: sans-serif;
   min-width: 300px;
   margin: 50px auto;
+  padding: 25px;
 }
 
 ul {
   list-style: none;
 }
 
+li {
+  margin-left: 4px;
+  display: inline;
+  padding: 4px;
+//   background-color: #fff;
+}
+
+.ui-menuitem-text{
+  font-size: 12px;
+}
+
+
 a {
-  font-size: smaller;
+  font-size: 12px;
 }
 
 .tour {
@@ -21,10 +34,6 @@ a {
 }
 .top-menu {
   display: inline-block;
-}
-
-.gutter-left {
-  margin-left: 9px;
 }
 
 .col-span-2 {
@@ -45,10 +54,6 @@ header {
 
 main {
   padding: 0 36px;
-}
-
-p {
-  text-align: center;
 }
 
 h1 {
@@ -143,4 +148,15 @@ summary {
   height: 16px;
   width: 16px;
   margin-right: 4px;
+}
+
+.seekHelp{
+  background-color: #fff2d2;
+  font-size: smaller;
+  max-width: 125px;
+  padding: 15px;
+
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
